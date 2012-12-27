@@ -1,0 +1,25 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{navigation /}
+
+<div class="container">
+	<div class="row">
+		<table class="table span12">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th><a href="@{Application.upload}" class="pull-right" title="Upload a PDF"><i class="icon-plus"></i></a></th>
+				</tr
+			</thead>
+			<tbody>
+				#{list items:models.Document.findAll(), as:'document'}
+					<tr>
+				   		<td><a href="@{Application.read(document.id)}">${document.title}</a></td>
+				   		<td><a href="@{Application.delete(document.id)}" class="pull-right" title="Remove from library"><i class="icon-trash"></i></a></td>
+					</tr>
+				#{/list}
+			</tbody>
+		</table>
+	</div>
+</div>

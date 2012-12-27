@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{navigation /}
+
+<div class="container">
+	<div class="row">
+		<div class="span12"><h3>Upload a PDF Document</h3></div>
+	</div>
+	
+	<div class="row">
+		<form class="form-horizontal" method="POST" action="@{Application.process}" enctype="multipart/form-data">
+			<div class="control-group">
+				<label class="control-label" for="document.title">Title</label>
+				<div class="controls">
+					<input type="text" id="title" name="document.title" placeholder="Document title">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="document.pdf">File</label>
+				<div class="controls">
+					<input type="file" id="pdf" name="document.pdf" accept="application/pdf">
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-primary">Upload</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
