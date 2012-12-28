@@ -14,10 +14,13 @@ public class Document extends Model {
 	
 	@Required
 	public Blob pdf;
+	
+	public int latest = 1;
 
 	public Document(String title, Blob data) {
 		this.title = title;
 		this.pdf = data;
+		this.latest = 1;
 	}
 
 }

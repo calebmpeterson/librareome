@@ -1,7 +1,7 @@
 PDFJS.disableWorker = true;
 
 var pdfDoc = null,
-	pageNum = 1,
+	pageNum = INIT_PAGE,
 	scale = 1.0,
 	canvas = document.getElementById('pdf-canvas'),
 	ctx = canvas.getContext('2d');
@@ -29,6 +29,31 @@ function renderPage(num) {
   document.getElementById('page-count').textContent = pdfDoc.numPages;
 }
 
+function recordLatestPage(pageNum) {
+  $.ajax({
+  	url  : '/read/' + PDF_ID + '/latest',
+  	type : 'POST',
+  	data : {
+  		id   : PDF_ID,
+  		page : pageNum
+  		}
+  	});
+}
+
+function zoomIn() {
+  if (scale > 10.0)
+  	return;
+  scale += 0.25;
+  renderPage(pageNum);
+}
+
+function zoomOut() {
+  if (scale < 1.0)
+  	return;
+  scale -= 0.25;
+  renderPage(pageNum);
+}
+
 //
 // Go to previous page
 //
@@ -37,6 +62,7 @@ function goPrevious() {
     return;
   pageNum--;
   renderPage(pageNum);
+  recordLatestPage(pageNum);
 }
 
 //
@@ -47,6 +73,7 @@ function goNext() {
     return;
   pageNum++;
   renderPage(pageNum);
+  recordLatestPage(pageNum);
 }
 
 //

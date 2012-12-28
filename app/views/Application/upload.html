@@ -5,29 +5,59 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span12"><h3>Upload a PDF Document</h3></div>
-	</div>
-	
-	<div class="row">
-		<form class="form-horizontal" method="POST" action="@{Application.process}" enctype="multipart/form-data">
+		<form class="form-horizontal" method="POST" action="@{Application.process}" enctype="multipart/form-data">		
 			<div class="control-group">
-				<label class="control-label" for="document.title">Title</label>
+				<div class="controls"><h3>Add to Your Library</h3></div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="doc.title">Title:</label>
 				<div class="controls">
-					<input type="text" id="title" name="document.title" placeholder="Document title">
+					<input type="text" class="input-xxlarge" id="title" name="doc.title" placeholder="Title">
 				</div>
 			</div>
+
 			<div class="control-group">
-				<label class="control-label" for="document.pdf">File</label>
+				<hr>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="doc.pdf">File:</label>
+				<div class="controls">				
+					<input style="display:none;" type="file" id="pdf" name="doc.pdf" accept="application/pdf">
+					<div class="input-append">
+						<input type="text" id="pdf-filename" class="input-xxlarge">
+						<a class="btn" onclick="$('#pdf').click()">Choose</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<div class="controls"><h5>Or</h5></div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="url">URL:</label>
 				<div class="controls">
-					<input type="file" id="pdf" name="document.pdf" accept="application/pdf">
+					<input type="text" class="input-xxlarge" id="url" name="url">
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary">Upload</button>
+					<button type="submit" class="btn btn-large btn-primary">Add to Library</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$('#pdf').change(function () {
+		var path = $(this).val().replace(/\\/g, '/'),
+			last = path.lastIndexOf('/'),
+			name = path.slice(last + 1);
+		
+		$('#pdf-filename').val(name);
+	});
+</script>

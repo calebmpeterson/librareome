@@ -6,11 +6,18 @@
 	<div class="navbar-inner">
 		<div class="container">
 		
-		<a class="brand" href="/">Librareome</a>
+		<ul class="nav">
+			<li><a href="@{Application.index}" title="Home"><i class="icon-home"></i></a></li>
+			<li class="divider-vertical"></li>
+			<li><a href="@{Application.document(doc.id)}" title="Download this document as a PDF"><i class="icon-download"></i></a></li>
+		</ul>
 		
 		<ul class="nav pull-right">
-			<li><a href="#" onclick="goPrevious()"><i class="icon-chevron-left"></i></a></li>
-			<li><a href="#" onclick="goNext()"><i class="icon-chevron-right"></i></a></li>
+			<li><a href="#" onclick="zoomOut()" title="Zoom out"><i class="icon-zoom-out"></i></a></li>
+			<li><a href="#" onclick="zoomIn()" title = "Zoom in"><i class="icon-zoom-in"></i></a></li>
+			<li class="divider-vertical"></li>
+			<li><a href="#" onclick="goPrevious()" title="Previous page"><i class="icon-chevron-left"></i></a></li>
+			<li><a href="#" onclick="goNext()" title = "Next page"><i class="icon-chevron-right"></i></a></li>
 		</ul>
 		
 		</div>
@@ -39,7 +46,9 @@
 <div class="spacer10"></div>
 
 <script type="text/javascript">
-	var PDF_URL = "@{Application.document(id)}";
+	var PDF_URL   = "@{Application.document(doc.id)}",
+		PDF_ID    = ${doc.id},
+		INIT_PAGE = ${doc.latest};
 </script>
 
 <script src="@{'/public/js/vendor/pdf.js'}"></script>

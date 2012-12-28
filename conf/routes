@@ -8,7 +8,8 @@ GET     /upload                                 Application.upload
 POST    /upload/process                         Application.process
 GET     /read/{id}                              Application.read
 GET     /document/{id}                          Application.document
-DELETE  /delete/{id}                            Application.delete
+POST    /read/{id}/latest                       Application.latest
+GET     /delete/{id}                            Application.delete
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
