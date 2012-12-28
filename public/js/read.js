@@ -49,6 +49,10 @@ function recordLatestPage(pageNum) {
   	});
 }
 
+
+//
+// Zoom in
+//
 function zoomIn() {
   if (scale > 10.0)
   	return;
@@ -56,6 +60,9 @@ function zoomIn() {
   renderPage(pageNum);
 }
 
+//
+// Zoom out
+//
 function zoomOut() {
   if (scale < 1.0)
   	return;
