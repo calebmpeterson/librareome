@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title: 'Reading' /}
+#{set 'title'}${doc.title}#{/set}
 
 <div class="container">
 <div id="navigation" class="navbar navbar-fixed-top">
@@ -9,7 +9,7 @@
 		<ul class="nav">
 			<li><a href="@{Application.index}" title="Home"><i class="icon-home"></i></a></li>
 			<li class="divider-vertical"></li>
-			<li><a href="@{Application.document(doc.id)}" title="Download this document as a PDF"><i class="icon-download"></i></a></li>
+			<li><a href="@{Application.document(doc.id)}" title="Download this document as a PDF"><i class="icon-download-alt"></i></a></li>
 		</ul>
 		
 		<ul class="nav pull-right">

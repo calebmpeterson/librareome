@@ -5,6 +5,15 @@ var pdfDoc = null,
 	scale = 1.0,
 	canvas = document.getElementById('pdf-canvas'),
 	ctx = canvas.getContext('2d');
+
+// Keyboard shortcuts for page navigation	
+shortcut.add('N', goNext);
+shortcut.add('Right', goNext);
+shortcut.add('Page_down', goNext);
+
+shortcut.add('P', goPrevious);
+shortcut.add('Left', goPrevious);
+shortcut.add('Page_up', goPrevious);
 	
 //
 // Get page info from document, resize canvas accordingly, and render page

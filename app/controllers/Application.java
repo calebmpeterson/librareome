@@ -5,8 +5,11 @@ import play.db.jpa.Blob;
 import play.libs.WS;
 import play.mvc.*;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 import models.*;
 
@@ -20,7 +23,7 @@ public class Application extends Controller {
 		render();
 	}
 
-	public static void process(Document doc, String url) {
+	public static void process(Document doc, String url) throws IOException {
 		doc.latest = 1;
 		
 		if (doc.pdf == null && url != null) {
@@ -28,6 +31,9 @@ public class Application extends Controller {
 			doc.pdf = new Blob();
 			doc.pdf.set(stream, "application/pdf");
 		}
+		
+		PDDocument pdf = PDDocument.load(doc.pdf.get());
+		doc.pages = pdf.getNumberOfPages();
 		
 		doc.save();
 		read(doc.id);
