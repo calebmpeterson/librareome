@@ -17,7 +17,7 @@ public class Document extends Model {
 	
 	public int latest = 1;
 
-	public int pages;
+	public int pages = 1;
 
 	public Document(String title, Blob data) {
 		this.title = title;

@@ -15,7 +15,7 @@ public class Bootstrap extends Job<Void> {
 
 	@Override
 	public void run() {
-		DB.execute("DROP TABLE document");
+		// no-op
 	}
 
 }
