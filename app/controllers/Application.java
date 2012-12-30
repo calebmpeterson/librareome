@@ -41,16 +41,18 @@ public class Application extends Controller {
 
 	public static void read(long id) {
 		Document doc = Document.findById(id);
-		if (doc != null) {
+		if (doc != null)
 			render(doc);
-		} else {
+		else
 			notFound("document with ID of " + id);
-		}
 	}
 
 	public static void document(long id) {
 		Document doc = Document.findById(id);
-		renderBinary(doc.pdf.get(), doc.title + ".pdf");
+		if (doc != null)
+			renderBinary(doc.pdf.get(), doc.title + ".pdf");
+		else
+			notFound("document with ID of " + id);
 	}
 
 	public static void delete(long id) {
