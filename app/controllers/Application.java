@@ -25,17 +25,17 @@ public class Application extends Controller {
 
 	public static void process(Document doc, String url) throws IOException {
 		doc.latest = 1;
-		
+
 		if (doc.pdf == null && url != null) {
 			InputStream stream = WS.url(url).get().getStream();
 			doc.pdf = new Blob();
 			doc.pdf.set(stream, "application/pdf");
 		}
-		
-		PDDocument pdf = PDDocument.load(doc.pdf.get());
-		doc.pages = pdf.getNumberOfPages();
-		
+
+		Document.correctPages(doc);
+
 		doc.save();
+
 		read(doc.id);
 	}
 

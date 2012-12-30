@@ -31,23 +31,17 @@ public class Document extends Model {
 		this.latest = 1;
 	}
 
-	@PostLoad
-	public void postLoad() {
-		if (this.pages == 0) {
-			Logger.info("correcting 'pages' for %s", this.title);
-			correctPages(this);
-		}
-	}
-
 	public static void correctPages(Document doc) {
 		try {
 			PDDocument pdf = PDDocument.load(doc.pdf.get());
 			doc.pages = pdf.getNumberOfPages();
 			pdf.close();
-
-			doc.save();
 		} catch (IOException e) {
-			Logger.error(e, "error correcting pages for %d: %s", doc.id, e.getMessage());
+			Logger.error(
+					e, 
+					"error correcting pages for %d: %s",
+					doc.id,
+					e.getMessage());
 		}
 	}
 
