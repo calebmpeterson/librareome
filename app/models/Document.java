@@ -31,7 +31,7 @@ public class Document extends Model {
 		this.latest = 1;
 	}
 
-	public static void correctPages(Document doc) {
+	public static void updatePageCount(Document doc) {
 		try {
 			PDDocument pdf = PDDocument.load(doc.pdf.get());
 			doc.pages = pdf.getNumberOfPages();

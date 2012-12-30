@@ -32,7 +32,7 @@ public class Application extends Controller {
 			doc.pdf.set(stream, "application/pdf");
 		}
 
-		Document.correctPages(doc);
+		Document.updatePageCount(doc);
 
 		doc.save();
 

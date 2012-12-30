@@ -27,11 +27,20 @@
 
 <div class="clearfix" style="height: 42px;"></div>
 
-<div id="pdf-container">
+<div id="pdf-loading" class="container">
+	<div class="row">
+		<div class="span12" style="text-align: center; margin-top: 200px;">
+			<img src="@{'/public/img/ajax-loader.gif'}" />
+			<h5>Loading</h5>
+		</div>
+	</div>
+</div>
+
+<div id="pdf-container" style="display: none;">
 	<canvas id="pdf-canvas"></canvas>
 </div>
 
-<div class="container">
+<div id="pdf-footer" class="container" style="display: none;">
 	<div class="row">
 		<div class="span5">
 		</div>

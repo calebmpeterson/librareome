@@ -97,6 +97,9 @@ function goNext() {
 //
 PDFJS.getDocument(PDF_URL).then(function getPdfHelloWorld(_pdfDoc) {
   pdfDoc = _pdfDoc;
+  $('#pdf-loading').hide();
+  $('#pdf-container').show();
+  $('#pdf-footer').show();
   renderPage(pageNum);
 });
     
