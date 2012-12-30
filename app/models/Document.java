@@ -47,7 +47,7 @@ public class Document extends Model {
 
 			doc.save();
 		} catch (IOException e) {
-			Logger.error(e, "error correcting pages for %i", doc.id);
+			Logger.error(e, "error correcting pages for %d: %s", doc.id, e.getMessage());
 		}
 	}
 
