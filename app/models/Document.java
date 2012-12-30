@@ -43,6 +43,7 @@ public class Document extends Model {
 		try {
 			PDDocument pdf = PDDocument.load(doc.pdf.get());
 			doc.pages = pdf.getNumberOfPages();
+			pdf.close();
 
 			doc.save();
 		} catch (IOException e) {
