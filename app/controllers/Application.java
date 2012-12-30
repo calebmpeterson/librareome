@@ -1,17 +1,15 @@
 package controllers;
 
-import play.*;
-import play.db.jpa.Blob;
-import play.libs.WS;
-import play.mvc.*;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
+import models.Document;
 
-import models.*;
+import org.apache.commons.io.IOUtils;
+
+import play.db.jpa.Blob;
+import play.libs.WS;
+import play.mvc.Controller;
 
 public class Application extends Controller {
 
@@ -23,16 +21,19 @@ public class Application extends Controller {
 		render();
 	}
 
-	public static void process(Document doc, String url) throws IOException {
-		doc.latest = 1;
+	public static void process(String title, Blob pdf, String url)
+			throws IOException {
+		final Document doc;
 
-		if (doc.pdf == null && url != null) {
-			InputStream stream = WS.url(url).get().getStream();
-			doc.pdf = new Blob();
-			doc.pdf.set(stream, "application/pdf");
+		if (pdf != null) {
+			doc = new Document(title, IOUtils.toByteArray(pdf.get()));
+		} else if (pdf == null && url != null) {
+			final InputStream stream = WS.url(url).get().getStream();
+			doc = new Document(title, IOUtils.toByteArray(stream));
+		} else {
+			doc = null;
+			error("no document");
 		}
-
-		Document.updatePageCount(doc);
 
 		doc.save();
 
@@ -40,7 +41,7 @@ public class Application extends Controller {
 	}
 
 	public static void read(long id) {
-		Document doc = Document.findById(id);
+		final Document doc = Document.findById(id);
 		if (doc != null)
 			render(doc);
 		else
@@ -48,22 +49,23 @@ public class Application extends Controller {
 	}
 
 	public static void document(long id) {
-		Document doc = Document.findById(id);
+		final Document doc = Document.findById(id);
 		if (doc != null)
-			renderBinary(doc.pdf.get(), doc.title + ".pdf");
+			renderBinary(doc.data(), doc.title + ".pdf");
 		else
 			notFound("document with ID of " + id);
 	}
 
 	public static void delete(long id) {
-		Document doc = Document.findById(id);
-		doc.delete();
+		final Document doc = Document.findById(id);
+		if (doc != null)
+			doc.delete();
 
 		index();
 	}
 
 	public static void latest(long id, int page) {
-		Document doc = Document.findById(id);
+		final Document doc = Document.findById(id);
 		if (doc != null) {
 			doc.latest = page;
 			doc.save();
