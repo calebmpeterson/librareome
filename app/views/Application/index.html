@@ -19,7 +19,7 @@
 				#{list items:models.Document.findAll(), as:'document'}
 					<tr>
 				   		<td><a href="@{Application.read(document.id)}">${document.title}</a></td>
-				   		<td class="center">${document.latest} / ${document.pages}</td>
+				   		<td style="text-align: center;">${document.latest} / ${document.pages}</td>
 				   		<td><a href="@{Application.delete(document.id)}" class="pull-right" title="Remove from library"><i class="icon-trash"></i></a>
 				   			<a href="@{Application.document(document.id)}" class="pull-right" title="Download"><i class="icon-download-alt"></i></a></td>
 					</tr>
